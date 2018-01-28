@@ -1,0 +1,48 @@
+{
+  "name": "semantic-commitlint",
+  "version": "0.0.0-semantic-release",
+  "description": "",
+  "main": "src/lint-commits.plugin.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\"",
+    "semantic-release": "semantic-release",
+    "semantic-commitlint": "./src/cli.js"
+  },
+  "bin": {
+    "semantic-commitlint": "./src/cli.js"
+  },
+  "author": "Adrian Carriger <hello@adriancarriger.com> (http://adriancarriger.com)",
+  "license": "MIT",
+  "dependencies": {
+    "@commitlint/cli": "^6.0.2",
+    "@commitlint/config-conventional": "^6.0.2",
+    "@commitlint/core": "^6.0.2",
+    "@semantic-release/error": "^2.1.0",
+    "@semantic-release/git": "^2.0.2",
+    "@semantic-release/github": "^3.0.3",
+    "commander": "^2.13.0",
+    "read-pkg-up": "^3.0.0",
+    "semantic-release": "^12.2.4"
+  },
+  "devDependencies": {
+    "condition-circle": "^2.0.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/adriancarriger/semantic-commitlint.git"
+  },
+  "release": {
+    "verifyConditions": [
+      "@semantic-release/git",
+      "@semantic-release/github",
+      "condition-circle"
+    ],
+    "getLastRelease": "@semantic-release/git",
+    "verifyRelease": [
+      "./src/lint-commits.plugin.js"
+    ]
+  },
+  "publishConfig": {
+    "tag": "next"
+  }
+}
