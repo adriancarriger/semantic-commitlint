@@ -1,11 +1,17 @@
 # Semantic Commitlint [![npm version](https://badge.fury.io/js/semantic-commitlint.svg)](https://badge.fury.io/js/semantic-commitlint)
 
-📦🚀📓 [semantic-release](https://github.com/semantic-release/semantic-release) + [commitlint](https://github.com/marionebl/commitlint) => Only release builds with good commits!
+📦🚀 + 📓 A continuous integration build tool to ensure all new commits meet your commit message format!
 ️️
 
 [![Build Status](https://img.shields.io/circleci/project/github/adriancarriger/semantic-commitlint/master.svg?maxAge=60)](https://circleci.com/gh/adriancarriger/semantic-commitlint)
 [![Dependency Status](https://img.shields.io/david/adriancarriger/semantic-commitlint/master.svg?maxAge=60)](https://david-dm.org/adriancarriger/semantic-commitlint)
 [![devDependency Status](https://img.shields.io/david/dev/adriancarriger/semantic-commitlint/master.svg?maxAge=60)](https://david-dm.org/adriancarriger/semantic-commitlint?type=dev)
+
+## Features
+
+* Run in CI on all branches to ensure that only builds with valid commit messages pass
+* Wraps [📦🚀 semantic-release](https://github.com/semantic-release/semantic-release) and [📓 commitlint](https://github.com/marionebl/commitlint)
+* Minimal config
 
 ## Install
 
@@ -19,6 +25,10 @@ Add the following to your `package.json`
 
 ```json
 {
+  "scripts": {
+    "semantic-commitlint": "semantic-commitlint",
+    "semantic-release": "semantic-release"
+  },
   "release": {
     "verifyRelease": [
       "semantic-commitlint"
@@ -26,6 +36,29 @@ Add the following to your `package.json`
   }
 }
 ```
+
+Setup [semantic-release authentication](https://github.com/semantic-release/semantic-release/blob/caribou/docs/usage/ci-configuration.md#ci-configuration) for CI
+
+## Usage
+
+Add the following commands to your CI build process
+
+```bash
+npm run semantic-commitlint -- --ci
+npm run semantic-release
+```
+
+## Local usage
+
+To get early feedback on commit messages you can add the following to a commit hook or your regular set of tests.
+
+```bash
+npm run semantic-commitlint
+```
+
+This allows your project's contributors to get early feedback on their last commit message instead of waiting for CI to fail a build.
+
+* **Last commit only** - this will not validate all new commit messages because Github auth is required to gather commits that have been added since the last release.
 
 ## Config
 
@@ -38,3 +71,19 @@ If there are unreleased commits that shouldn't fail a build, then add them to yo
   }
 }
 ```
+
+## External config
+
+This project just ties together some functionality from two external projects. For all other config options make sure to read through the docs.
+
+* [📦🚀 semantic-release](https://github.com/semantic-release/semantic-release)
+* [📓 commitlint](https://github.com/marionebl/commitlint)
+
+## Issues
+
+Not all features implemented in semantic-release and commitlint are currently available when using semantic-commtlint. If you have a suggestion, please [open an issue](https://github.com/adriancarriger/semantic-commitlint/issues/new). Thanks!
+
+## License
+
+frosted-glass is licensed under the MIT Open Source license.
+For more information, see the [LICENSE](LICENSE) file in this repository.
