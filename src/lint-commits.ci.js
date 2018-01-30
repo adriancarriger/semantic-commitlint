@@ -1,10 +1,10 @@
 // @ts-nocheck
-const readPkgUp = require('read-pkg-up');
 const getConfig = require('semantic-release/lib/get-config');
 const getCommits = require('semantic-release/lib/get-commits');
 const logger = require('semantic-release/lib/logger');
 
 const verifyCommits = require('./lint-commits.plugin');
+const { getSemanticCommitlintConfig } = require('./util');
 
 async function runCommitLint(opts) {
   console.log('semantic-commitlint: CI');
@@ -26,11 +26,6 @@ async function runCommitLint(opts) {
 
 function filterCommits(commits, skips) {
   return commits.filter(commitData => !skips.includes(commitData.commit.short));
-}
-
-async function getSemanticCommitlintConfig() {
-  const { pkg } = await readPkgUp();
-  return pkg && pkg.semanticCommitlint ? pkg.semanticCommitlint : {};
 }
 
 runCommitLint().catch(error => {

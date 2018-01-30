@@ -1,6 +1,9 @@
 const { format, load, lint } = require('@commitlint/core');
 const SemanticReleaseError = require('@semantic-release/error');
 const config = require('@commitlint/config-conventional');
+const path = require('path');
+
+const { getSemanticCommitlintConfig } = require('./util');
 
 function verifyRelease(repoData, data) {
   return validateCommits(data.commits);
@@ -8,11 +11,14 @@ function verifyRelease(repoData, data) {
 
 async function validateCommits(commits) {
   const opts = await load(config);
-  await Promise.all(commits.map((commit) => validateCommit(commit, opts)));
+  const semanticCommitlintConfig = await getSemanticCommitlintConfig();
+  const customLintFunctions = getCustomLintFunctions(semanticCommitlintConfig);
+  await Promise.all(commits.map((commit) => validateCommit(commit, opts, customLintFunctions)));
 }
 
-async function validateCommit(commitMeta, opts) {
+async function validateCommit(commitMeta, opts, customLintFunctions) {
   const report = await lint(`${commitMeta.message}`, opts.rules, opts.parserPreset ? {parserOpts: opts.parserPreset.parserOpts} : {});
+  customLintFunctions.forEach(customLintFunction => customLintFunction(commitMeta.message, report));
   if (!report.valid) {
     const detail = commitMeta.commit.short ? ` ${commitMeta.commit.short}` : '';
     console.error('😞   Errors found with commit' + detail);
@@ -24,6 +30,15 @@ async function validateCommit(commitMeta, opts) {
       'EINVALIDCOMMIT'
     );
   }
+}
+
+function getCustomLintFunctions({ lintFunctions }) {
+  if (lintFunctions === undefined) { return []; }
+  return lintFunctions.map(requireRelative);
+}
+
+function requireRelative(relativePath) {
+  return require(path.resolve(relativePath));
 }
 
 module.exports = verifyRelease;
