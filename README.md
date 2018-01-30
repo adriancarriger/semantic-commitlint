@@ -62,6 +62,8 @@ This allows your project's contributors to get early feedback on their last comm
 
 ## Config
 
+### Skip commits
+
 If there are unreleased commits that shouldn't fail a build, then add them to your `package.json` inside the `semanticCommitlint` config.
 
 ```json
@@ -70,6 +72,37 @@ If there are unreleased commits that shouldn't fail a build, then add them to yo
     "skipCommits": ["a1be371"]
   }
 }
+```
+
+### Custom lint functions
+
+To add a custom lint function add your function's path in `package.json`.
+
+```json
+{
+  "semanticCommitlint": {
+    "lintFunctions": ["./my-function.js"]
+  }
+}
+```
+
+The function itself works like this:
+
+```js
+// my-function.js
+function customValidation(commitMessage, report) {
+  if (commitMessage.includes('something bad')) {
+    report.valid = false;
+    report.errors.push({
+      level: 2,
+      valid: false,
+      name: 'type-bad',
+      message: 'Commit message should have been better!'
+    });
+  }
+}
+
+module.exports = customValidation;
 ```
 
 ## External config
