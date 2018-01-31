@@ -3,7 +3,6 @@ import * as SemanticReleaseError from '@semantic-release/error';
 import * as config from '@commitlint/config-conventional';
 import * as path from 'path';
 
-
 import { getSemanticCommitlintConfig } from './util';
 
 export function verifyRelease(repoData, data): Promise<void> {

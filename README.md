@@ -112,6 +112,28 @@ This project just ties together some functionality from two external projects. F
 * [📦🚀 semantic-release](https://github.com/semantic-release/semantic-release)
 * [📓 commitlint](https://github.com/marionebl/commitlint)
 
+## Commit hooks
+
+You can prevent invalid commit messages from every being created by using [Git hooks](https://git-scm.com/book/en/v2/Customizing-Git-Git-Hooks)!
+
+* Add [husky](https://github.com/typicode/husky)
+
+```bash
+npm install --save-dev husky@next
+```
+
+* Update `package.json`
+
+```json
+{
+  "husky": {
+    "hooks": {
+      "prepare-commit-msg": "npm run semantic-commitlint -- -h"
+    }
+  }
+}
+```
+
 ## Issues
 
 Not all features implemented in semantic-release and commitlint are currently available when using semantic-commtlint. If you have a suggestion, please [open an issue](https://github.com/adriancarriger/semantic-commitlint/issues/new). Thanks!
