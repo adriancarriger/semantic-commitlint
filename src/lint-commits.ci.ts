@@ -1,12 +1,12 @@
 // @ts-nocheck
-const getConfig = require('semantic-release/lib/get-config');
-const getCommits = require('semantic-release/lib/get-commits');
-const logger = require('semantic-release/lib/logger');
+import * as getConfig from 'semantic-release/lib/get-config';
+import * as getCommits from 'semantic-release/lib/get-commits';
+import * as logger from 'semantic-release/lib/logger';
 
-const verifyCommits = require('./lint-commits.plugin');
-const { getSemanticCommitlintConfig } = require('./util');
+import { validateCommits } from './lint-commits.plugin';
+import { getSemanticCommitlintConfig } from './util';
 
-async function runCommitLint(opts) {
+export default async function runCommitLint(opts?) {
   console.log('semantic-commitlint: CI');
   const semanticCommitlintConfig = await getSemanticCommitlintConfig();
   const commitsToSkip = semanticCommitlintConfig.skipCommits || [];
@@ -19,9 +19,7 @@ async function runCommitLint(opts) {
     logger
   );
 
-  await verifyCommits({}, {
-    commits: filterCommits(commits, commitsToSkip)
-  });
+  await validateCommits(filterCommits(commits, commitsToSkip));
 };
 
 function filterCommits(commits, skips) {
@@ -32,5 +30,3 @@ runCommitLint().catch(error => {
   console.error(error);
   process.exit(1);
 });
-
-module.exports = runCommitLint

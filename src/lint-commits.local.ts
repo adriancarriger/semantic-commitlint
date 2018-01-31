@@ -1,15 +1,15 @@
-const { execSync } = require('child_process');
+import { execSync } from 'child_process'
 
-const verifyCommits = require('./lint-commits.plugin');
+import { validateCommits } from './lint-commits.plugin';
 
 const commits = [{
   message: lastCommitMessage(),
   commit: {}
 }];
 
-function runLocal() {
+export default function runLocal() {
   console.log('semantic-commitlint: local');
-  return verifyCommits({}, {commits});
+  return validateCommits(commits);
 }
 
 function lastCommitMessage() {
@@ -19,5 +19,3 @@ function lastCommitMessage() {
     return execSync('git log -1 --pretty=%B').toString();
   }
 }
-
-module.exports = runLocal;

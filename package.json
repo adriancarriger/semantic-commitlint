@@ -2,14 +2,15 @@
   "name": "semantic-commitlint",
   "version": "0.0.0-semantic-release",
   "description": "",
-  "main": "src/lint-commits.plugin.js",
+  "main": "dist/lint-commits.plugin.js",
   "scripts": {
     "test": "echo \"Error: no test specified\"",
+    "build": "tsc",
     "semantic-release": "semantic-release",
-    "semantic-commitlint": "./src/cli.js"
+    "semantic-commitlint": "node ./dist/cli.js"
   },
   "bin": {
-    "semantic-commitlint": "./src/cli.js"
+    "semantic-commitlint": "./dist/cli.js"
   },
   "author": "Adrian Carriger <hello@adriancarriger.com> (http://adriancarriger.com)",
   "license": "MIT",
@@ -25,7 +26,9 @@
     "semantic-release": "^12.2.4"
   },
   "devDependencies": {
-    "condition-circle": "^2.0.1"
+    "@types/node": "^9.4.0",
+    "condition-circle": "^2.0.1",
+    "typescript": "^2.6.2"
   },
   "repository": {
     "type": "git",
@@ -39,7 +42,7 @@
     ],
     "getLastRelease": "@semantic-release/git",
     "verifyRelease": [
-      "./src/lint-commits.plugin.js"
+      "./dist/lint-commits.plugin.js"
     ]
   },
   "publishConfig": {

@@ -1,15 +1,16 @@
-const { format, load, lint } = require('@commitlint/core');
-const SemanticReleaseError = require('@semantic-release/error');
-const config = require('@commitlint/config-conventional');
-const path = require('path');
+import { format, load, lint } from '@commitlint/core';
+import * as SemanticReleaseError from '@semantic-release/error';
+import * as config from '@commitlint/config-conventional';
+import * as path from 'path';
 
-const { getSemanticCommitlintConfig } = require('./util');
 
-function verifyRelease(repoData, data) {
+import { getSemanticCommitlintConfig } from './util';
+
+export function verifyRelease(repoData, data): Promise<void> {
   return validateCommits(data.commits);
 }
 
-async function validateCommits(commits) {
+export async function validateCommits(commits) {
   const opts = await load(config);
   const semanticCommitlintConfig = await getSemanticCommitlintConfig();
   const customLintFunctions = getCustomLintFunctions(semanticCommitlintConfig);
@@ -40,5 +41,3 @@ function getCustomLintFunctions({ lintFunctions }) {
 function requireRelative(relativePath) {
   return require(path.resolve(relativePath));
 }
-
-module.exports = verifyRelease;
