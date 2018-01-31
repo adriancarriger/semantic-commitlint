@@ -28,6 +28,7 @@
   "devDependencies": {
     "@types/node": "^9.4.0",
     "condition-circle": "^2.0.1",
+    "husky": "^0.15.0-rc.3",
     "typescript": "^2.6.2"
   },
   "repository": {
@@ -47,5 +48,10 @@
   },
   "publishConfig": {
     "tag": "next"
+  },
+  "husky": {
+    "hooks": {
+      "prepare-commit-msg": "yarn run semantic-commitlint -h"
+    }
   }
 }
