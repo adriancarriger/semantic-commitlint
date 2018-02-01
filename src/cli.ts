@@ -13,7 +13,7 @@ process.env.COMMIT_HOOK = program.hook;
 
 const runCommitLint = require(`./lint-commits.${location}`).default;
 
-runCommitLint().catch(error => {
+runCommitLint().catch((error) => {
   console.error(error);
   process.exit(1);
 });

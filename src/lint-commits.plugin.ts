@@ -1,6 +1,6 @@
-import { format, load, lint } from '@commitlint/core';
-import * as SemanticReleaseError from '@semantic-release/error';
 import * as config from '@commitlint/config-conventional';
+import { format, lint, load } from '@commitlint/core';
+import * as SemanticReleaseError from '@semantic-release/error';
 import * as path from 'path';
 
 import { getSemanticCommitlintConfig } from './util';
@@ -17,14 +17,17 @@ export async function validateCommits(commits) {
 }
 
 async function validateCommit(commitMeta, opts, customLintFunctions) {
-  const report = await lint(`${commitMeta.message}`, opts.rules, opts.parserPreset ? {parserOpts: opts.parserPreset.parserOpts} : {});
-  customLintFunctions.forEach(customLintFunction => customLintFunction(commitMeta.message, report));
+  const report = await lint(
+    `${commitMeta.message}`,
+    opts.rules, opts.parserPreset ? {parserOpts: opts.parserPreset.parserOpts} : {}
+  );
+  customLintFunctions.forEach((customLintFunction) => customLintFunction(commitMeta.message, report));
   if (!report.valid) {
     const detail = commitMeta.commit.short ? ` ${commitMeta.commit.short}` : '';
     console.error('😞   Errors found with commit' + detail);
     console.error(`💬   ${commitMeta.message}`);
     const formated = format({errors: report.errors});
-    formated.forEach(item => console.log(item));
+    formated.forEach((item) => console.log(item));
     throw new SemanticReleaseError(
       `The commit message is not formatted correctly`,
       'EINVALIDCOMMIT'
