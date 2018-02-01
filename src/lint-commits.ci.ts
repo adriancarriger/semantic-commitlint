@@ -1,6 +1,6 @@
 // @ts-nocheck
-import * as getConfig from 'semantic-release/lib/get-config';
 import * as getCommits from 'semantic-release/lib/get-commits';
+import * as getConfig from 'semantic-release/lib/get-config';
 import * as logger from 'semantic-release/lib/logger';
 
 import { validateCommits } from './lint-commits.plugin';
@@ -20,13 +20,13 @@ export default async function runCommitLint(opts?) {
   );
 
   await validateCommits(filterCommits(commits, commitsToSkip));
-};
-
-function filterCommits(commits, skips) {
-  return commits.filter(commitData => !skips.includes(commitData.commit.short));
 }
 
-runCommitLint().catch(error => {
+function filterCommits(commits, skips) {
+  return commits.filter((commitData) => !skips.includes(commitData.commit.short));
+}
+
+runCommitLint().catch((error) => {
   console.error(error);
   process.exit(1);
 });
