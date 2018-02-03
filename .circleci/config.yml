@@ -34,6 +34,7 @@ jobs:
           key: v1-dependencies-{{ checksum "package.json" }}
 
       # run tests!
+      - run: yarn run lint
       - run: yarn run build
       - run: yarn run semantic-commitlint --ci
       - run: yarn run semantic-release
