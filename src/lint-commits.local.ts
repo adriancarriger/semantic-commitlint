@@ -13,7 +13,7 @@ export default function runLocal() {
 }
 
 function lastCommitMessage() {
-  if (process.env.COMMIT_HOOK) {
+  if (process.env.COMMIT_HOOK === 'true') {
     return require('fs').readFileSync('.git/COMMIT_EDITMSG', 'utf8');
   } else {
     return execSync('git log -1 --pretty=%B').toString();
