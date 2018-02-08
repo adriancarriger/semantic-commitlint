@@ -7,10 +7,19 @@
 [![Dependency Status](https://img.shields.io/david/adriancarriger/semantic-commitlint/master.svg?maxAge=60)](https://david-dm.org/adriancarriger/semantic-commitlint)
 [![devDependency Status](https://img.shields.io/david/dev/adriancarriger/semantic-commitlint/master.svg?maxAge=60)](https://david-dm.org/adriancarriger/semantic-commitlint?type=dev)
 
+## Problem
+
+* [📦🚀 semantic-release](https://github.com/semantic-release/semantic-release) depends on properly formated commit messages
+* [📓 commitlint](https://github.com/marionebl/commitlint) is awesome, but it doesn't know which commits occurred since your last relesae
+
+## Solution
+
+* [📦🚀 + 📓 semantic-commitlint](https://github.com/adriancarriger/semantic-commitlint) fills the gap between semantic-release and commitlint by asking commitlint to lint new commit messages that have not been included in a previous release
+
 ## Features
 
 * Run in CI on all branches to ensure that only builds with valid commit messages pass
-* Wraps [📦🚀 semantic-release](https://github.com/semantic-release/semantic-release) and [📓 commitlint](https://github.com/marionebl/commitlint)
+* Wraps [📦🚀 semantic-release](https://github.com/semantic-release/semantic-release) and [📓 commitlint](https://github.com/marionebl/commitlint) for an easy install
 * Minimal config
 
 ## Install
