@@ -1,5 +1,6 @@
 import * as config from '@commitlint/config-conventional';
 import { format, lint, load } from '@commitlint/core';
+import * as isIgnored from '@commitlint/is-ignored';
 import * as SemanticReleaseError from '@semantic-release/error';
 import * as path from 'path';
 
@@ -21,7 +22,10 @@ async function validateCommit(commitMeta, opts, customLintFunctions) {
     `${commitMeta.message}`,
     opts.rules, opts.parserPreset ? {parserOpts: opts.parserPreset.parserOpts} : {}
   );
-  customLintFunctions.forEach((customLintFunction) => customLintFunction(commitMeta.message, report));
+  customLintFunctions.forEach((customLintFunction) => {
+    if (isIgnored(commitMeta.message)) { return; }
+    customLintFunction(commitMeta.message, report);
+  });
   if (!report.valid) {
     const detail = commitMeta.commit.short ? ` ${commitMeta.commit.short}` : '';
     console.error('😞   Errors found with commit' + detail);
