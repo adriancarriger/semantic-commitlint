@@ -39,9 +39,7 @@ Add the following to your `package.json`
     "semantic-release": "semantic-release"
   },
   "release": {
-    "verifyRelease": [
-      "semantic-commitlint"
-    ]
+    "verifyRelease": ["semantic-commitlint"]
   }
 }
 ```
@@ -149,5 +147,5 @@ Not all features implemented in semantic-release and commitlint are currently av
 
 ## License
 
-frosted-glass is licensed under the MIT Open Source license.
+semantic-commitlint is licensed under the MIT Open Source license.
 For more information, see the [LICENSE](LICENSE) file in this repository.
