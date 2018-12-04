@@ -9,8 +9,8 @@
 
 ## Problem
 
-* [📦🚀 semantic-release](https://github.com/semantic-release/semantic-release) depends on properly formated commit messages
-* [📓 commitlint](https://github.com/marionebl/commitlint) is awesome, but it doesn't know which commits occurred since your last relesae
+* [📦🚀 semantic-release](https://github.com/semantic-release/semantic-release) depends on properly formatted commit messages
+* [📓 commitlint](https://github.com/marionebl/commitlint) is awesome, but it doesn't know which commits occurred since your last release
 
 ## Solution
 
