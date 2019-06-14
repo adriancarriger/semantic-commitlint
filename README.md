@@ -6,6 +6,7 @@
 [![Build Status](https://img.shields.io/circleci/project/github/adriancarriger/semantic-commitlint/master.svg?maxAge=60)](https://circleci.com/gh/adriancarriger/semantic-commitlint)
 [![Dependency Status](https://img.shields.io/david/adriancarriger/semantic-commitlint/master.svg?maxAge=60)](https://david-dm.org/adriancarriger/semantic-commitlint)
 [![devDependency Status](https://img.shields.io/david/dev/adriancarriger/semantic-commitlint/master.svg?maxAge=60)](https://david-dm.org/adriancarriger/semantic-commitlint?type=dev)
+[![Downloads per month](https://img.shields.io/npm/dm/semantic-commitlint.svg)](https://www.npmjs.com/package/semantic-commitlint)
 
 ## Problem
 
