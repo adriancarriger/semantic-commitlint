@@ -23,10 +23,10 @@ export default async function runCommitLint(opts?) {
 }
 
 function filterCommits(commits, skips) {
-  return commits.filter((commitData) => !skips.includes(commitData.commit.short));
+  return commits.filter(commitData => !skips.includes(commitData.commit.short));
 }
 
-runCommitLint().catch((error) => {
+runCommitLint().catch(error => {
   console.error(error);
   process.exit(1);
 });
