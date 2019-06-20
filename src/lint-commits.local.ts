@@ -2,10 +2,12 @@ import { execSync } from 'child_process';
 
 import { validateCommits } from './lint-commits.plugin';
 
-const commits = [{
-  commit: {},
-  message: lastCommitMessage()
-}];
+const commits = [
+  {
+    commit: {},
+    message: lastCommitMessage()
+  }
+];
 
 export default function runLocal() {
   console.log('semantic-commitlint: local');
