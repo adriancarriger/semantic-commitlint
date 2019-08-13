@@ -23,12 +23,14 @@ async function validateCommit(commitMeta, opts, customLintFunctions) {
     opts.rules,
     opts.parserPreset ? { parserOpts: opts.parserPreset.parserOpts } : {}
   );
-  customLintFunctions.forEach(customLintFunction => {
-    if (isIgnored(commitMeta.message)) {
-      return;
-    }
-    customLintFunction(commitMeta.message, report);
-  });
+  await Promise.all(
+    customLintFunctions.map(async customLintFunction => {
+      if (isIgnored(commitMeta.message)) {
+        return;
+      }
+      await customLintFunction(commitMeta.message, report);
+    })
+  );
   if (!report.valid) {
     const detail = commitMeta.commit.short ? ` ${commitMeta.commit.short}` : '';
     console.error('😞   Errors found with commit' + detail);
